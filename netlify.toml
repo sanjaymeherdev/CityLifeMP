@@ -1,0 +1,28 @@
+# Netlify configuration for Godot 4 HTML5 export
+# This version allows external API calls (Supabase, Ably)
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # CRITICAL: Use 'credentialless' instead of 'require-corp'
+    # This allows external API calls while still enabling SharedArrayBuffer
+    Cross-Origin-Embedder-Policy = "credentialless"
+    Cross-Origin-Opener-Policy = "same-origin"
+
+[[headers]]
+  for = "/*.wasm"
+  [headers.values]
+    Content-Type = "application/wasm"
+    # Allow this resource to be loaded cross-origin
+    Cross-Origin-Resource-Policy = "cross-origin"
+
+[[headers]]
+  for = "/*.pck"
+  [headers.values]
+    Content-Type = "application/octet-stream"
+    Cross-Origin-Resource-Policy = "cross-origin"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cross-Origin-Resource-Policy = "cross-origin"
